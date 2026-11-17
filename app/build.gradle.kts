@@ -19,6 +19,8 @@ android {
 
         testInstrumentationRunner =
             "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_URL", "\"https://newsapi.org/v2/\"")
     }
 
     buildTypes {
@@ -26,10 +28,12 @@ android {
             optimization {
                 enable = false
             }
+
         }
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 
@@ -52,6 +56,10 @@ dependencies {
     implementation(libs.compose.material)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.androidx.ui.graphics)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
