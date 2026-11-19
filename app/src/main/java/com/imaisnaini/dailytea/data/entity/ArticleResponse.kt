@@ -1,6 +1,6 @@
 package com.imaisnaini.dailytea.data.entity
 
-data class EverythingResponse(
+data class ArticleResponse(
     val status: String,
     val totalResult: Int?,
     val articles: List<Article>?,
