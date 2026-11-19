@@ -21,6 +21,7 @@ android {
             "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_URL", "\"https://newsapi.org/v2/\"")
+        buildConfigField("String", "API_KEY", "\"bcd62d59431b49488528f5926f606c05\"")
     }
 
     buildTypes {
@@ -46,6 +47,7 @@ android {
 dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
 
@@ -69,4 +71,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }

@@ -1,7 +1,7 @@
-package com.imaisnaini.dailytea.data.entity
+package com.imaisnaini.dailytea.data.dto
 
-data class Article(
-    val source: ArticleSource,
+data class ArticleDto(
+    val source: ArticleSourceDto,
     val author: String?,
     val title: String?,
     val description: String?,

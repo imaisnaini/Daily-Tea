@@ -1,5 +1,6 @@
 package com.imaisnaini.dailytea.di
 
+import com.imaisnaini.dailytea.BuildConfig
 import com.imaisnaini.dailytea.data.enpoint.ApiService
 import dagger.Module
 import dagger.Provides
@@ -9,7 +10,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -18,6 +18,14 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val request = chain.request()
+                    .newBuilder()
+                    .addHeader("X-Api-Key", BuildConfig.API_KEY)
+                    .build()
+
+                chain.proceed(request)
+            }
             .build()
     }
 
@@ -27,7 +35,7 @@ object NetworkModule {
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://your-api-base-url/")
+            .baseUrl(BuildConfig.API_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

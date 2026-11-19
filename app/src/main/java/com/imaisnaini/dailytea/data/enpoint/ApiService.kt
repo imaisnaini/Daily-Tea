@@ -1,34 +1,31 @@
 package com.imaisnaini.dailytea.data.enpoint
 
-import com.imaisnaini.dailytea.BuildConfig
-import com.imaisnaini.dailytea.data.entity.ArticleResponse
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.imaisnaini.dailytea.data.dto.ArticleResponseDto
+import com.imaisnaini.dailytea.data.dto.SourceResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
-import kotlin.jvm.java
 
 interface ApiService {
-    @GET("v2/top-headlines")
-    suspend fun getTopHeadlinesByCategory(
-        @Query("q") query: String,
-        @Query("page") page: Int = 1,
-        @Query("pageSize") pageSize: Int = 20
-    ): ArticleResponse
+    @GET("v2/top-headlines/sources")
+    suspend fun getSources(
+        @Query("category") category: String? = null,
+    ): SourceResponseDto
 
     @GET("v2/top-headlines")
-    suspend fun getTopHeadlinesBySource(
-        @Query("sources") source: String,
+    suspend fun getTopHeadlines(
+        @Query("sources") sources: String? = null,
+        @Query("category") category: String? = null,
         @Query("q") query: String? = null,
         @Query("page") page: Int = 1,
         @Query("pageSize") pageSize: Int = 20
-    ): ArticleResponse
+    ): ArticleResponseDto
 
     @GET("v2/everything")
-    suspend fun searchArticles(
+    suspend fun searchEverything(
         @Query("q") query: String,
-        @Query("sources") source: String? = null,
+        @Query("sources") sources: String? = null,
+        @Query("sortBy") sortBy: String = "publishedAt",
         @Query("page") page: Int = 1,
         @Query("pageSize") pageSize: Int = 20
-    ): ArticleResponse
+    ): ArticleResponseDto
 }
