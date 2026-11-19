@@ -5,13 +5,10 @@ enum class Category(
     val apiValue: String
 ) {
     TECHNOLOGY("Technology", "technology"),
-    EDUCATION("Education", "education"),
-    POLITICS("Politics", "politics"),
-    FINANCE("Finance", "finance"),
+    GENERAL("General", "general"),
+    BUSINESS("Business", "business"),
     HEALTH("Health", "health"),
-    NATURE("Nature", "nature"),
     SCIENCE("Science", "science"),
     SPORTS("Sports", "sports"),
     ENTERTAINMENT("Entertainment", "entertainment"),
-    CULTURE("Culture", "culture"),
 }

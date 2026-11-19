@@ -27,11 +27,6 @@ val SuccessGreen = Color(0xFF16865B)
 val ErrorRed = Color(0xFFD93636)
 val WarningOrange = Color(0xFFF29924)
 
-// Category accents
-val RoyalIndigo = Color(0xFF3F62D7)
-val DeepTeal = Color(0xFF0D9488)
-val VividPurple = Color(0xFF6D4AFF)
-
 // Dark theme
 val BackgroundDark = Color(0xFF101B2D)
 val SurfaceDark = Color(0xFF1A2940)

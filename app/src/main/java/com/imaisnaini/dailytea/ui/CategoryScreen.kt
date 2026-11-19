@@ -38,12 +38,14 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.imaisnaini.dailytea.domain.model.Category
 import com.imaisnaini.dailytea.ui.compose.CategoryCardStyle
 import com.imaisnaini.dailytea.ui.compose.SearchBar
 import com.imaisnaini.dailytea.ui.compose.cardStyle
 import com.imaisnaini.dailytea.ui.theme.BackgroundLight
+import com.imaisnaini.dailytea.ui.theme.MyTheme
 import com.imaisnaini.dailytea.ui.theme.PrimaryBlue
 import com.imaisnaini.dailytea.ui.theme.TextPrimary
 import com.imaisnaini.dailytea.ui.theme.TextSecondary
@@ -92,26 +94,14 @@ fun CategoryScreen(
                 )
             }
             items(
-                items = Category.entries.chunked(2),
-                key = { row -> row.joinToString("_") { it.name } }
-            ) { rowCategories ->
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(padding_large),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = spacer_normal)
-                ) {
-                    rowCategories.forEach { category ->
-                        CategoryCard(
-                            category = category,
-                            onClick = { onCategoryClick(category) },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                    if (rowCategories.size == 1) {
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
-                }
+                items = Category.entries,
+                key = { it.name }
+            ) { category ->
+                CategoryCard(
+                    category = category,
+                    onClick = { onCategoryClick(category) },
+                    modifier = Modifier.padding(horizontal = spacer_normal)
+                )
             }
         }
     }
@@ -186,27 +176,27 @@ private fun CategoryCard(
         shape = cardShape,
         color = style.containerColor,
         modifier = modifier
-            .aspectRatio(1.12f)
+            .fillMaxWidth()
             .clip(cardShape)
             .clickable(onClick = onClick)
     ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(padding_large),
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .drawBehind {
                     drawCircle(
                         color = style.contentColor.copy(alpha = 0.12f),
-                        radius = size.minDimension * 0.38f,
+                        radius = size.height * 0.65f,
                         center = Offset(
-                            x = size.width * 0.82f,
-                            y = size.height * 0.82f
+                            x = size.width * 0.92f,
+                            y = size.height * 0.75f
                         )
                     )
                 }
                 .padding(padding_large)
         ) {
-            // Top-left icon badge
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
@@ -222,8 +212,10 @@ private fun CategoryCard(
                 )
             }
 
-            // Bottom-left title & prompt
-            Column(verticalArrangement = Arrangement.spacedBy(padding_small)) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(padding_small),
+                modifier = Modifier.weight(1f)
+            ) {
                 Text(
                     text = category.displayName,
                     style = Typography.subtitle1.copy(
@@ -241,5 +233,16 @@ private fun CategoryCard(
                 )
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun CategoriesScreenPreview() {
+    MyTheme(darkTheme = false) {
+        CategoryScreen(
+            onCategoryClick = {},
+            onSearchSubmit = {}
+        )
     }
 }

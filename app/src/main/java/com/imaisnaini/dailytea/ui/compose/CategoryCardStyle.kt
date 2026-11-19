@@ -20,17 +20,12 @@ val Category.cardStyle: CategoryCardStyle
             contentColor = TextOnPrimary,
             icon = Icons.Rounded.Memory
         )
-        Category.EDUCATION -> CategoryCardStyle(
-            containerColor = RoyalIndigo,
-            contentColor = TextOnPrimary,
-            icon = Icons.Rounded.School
-        )
-        Category.POLITICS -> CategoryCardStyle(
+        Category.GENERAL -> CategoryCardStyle(
             containerColor = BrandBlue,
             contentColor = TextOnPrimary,
             icon = Icons.Rounded.Public
         )
-        Category.FINANCE -> CategoryCardStyle(
+        Category.BUSINESS -> CategoryCardStyle(
             containerColor = BrandYellow,
             contentColor = TextOnYellow,
             icon = Icons.Rounded.TrendingUp
@@ -40,7 +35,7 @@ val Category.cardStyle: CategoryCardStyle
             contentColor = TextOnPrimary,
             icon = Icons.Rounded.MonitorHeart
         )
-        Category.NATURE -> CategoryCardStyle(
+        Category.SCIENCE -> CategoryCardStyle(
             containerColor = SuccessGreen,
             contentColor = TextOnPrimary,
             icon = Icons.Rounded.Eco
@@ -50,17 +45,7 @@ val Category.cardStyle: CategoryCardStyle
             contentColor = BrandBlue,
             icon = Icons.Rounded.Science
         )
-        Category.SCIENCE -> CategoryCardStyle(
-            containerColor = DeepTeal,
-            contentColor = TextOnPrimary,
-            icon = Icons.Rounded.SportsSoccer
-        )
         Category.ENTERTAINMENT -> CategoryCardStyle(
-            containerColor = VividPurple,
-            contentColor = TextOnPrimary,
-            icon = Icons.Rounded.Movie
-        )
-        Category.CULTURE -> CategoryCardStyle(
             containerColor = WarningOrange,
             contentColor = TextPrimary,
             icon = Icons.Rounded.StarBorder
