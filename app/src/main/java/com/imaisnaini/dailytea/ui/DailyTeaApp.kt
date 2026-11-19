@@ -18,6 +18,7 @@ fun DailyTeaApp() {
         composable("categories") {
             CategoryScreen(
                 onCategoryClick = {},
+                onSearchSubmit = {},
                 modifier = Modifier
             )
         }

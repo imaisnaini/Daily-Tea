@@ -46,7 +46,7 @@ fun SearchBar(
     onQueryChange: (String) -> Unit,
     onSearchClick: () -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "Search sources or news articles...",
+    placeholder: String = "Find you tea..",
     buttonText: String = "Search",
     enabled: Boolean = true
 ) {
