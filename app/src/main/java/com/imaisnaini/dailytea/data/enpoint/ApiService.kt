@@ -31,19 +31,4 @@ interface ApiService {
         @Query("page") page: Int = 1,
         @Query("pageSize") pageSize: Int = 20
     ): ArticleResponse
-
-    companion object{
-        var apiService: ApiService? = null
-        fun getInstance(): ApiService {
-            if (apiService == null) {
-                apiService = Retrofit.Builder()
-                    .baseUrl(BuildConfig.API_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build().create(ApiService::class.java)
-            }
-            return apiService!!
-        }
-    }
-
-
 }

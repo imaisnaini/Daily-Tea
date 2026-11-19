@@ -51,15 +51,20 @@ dependencies {
 
     // Compose BOM
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.navigation.compose)
 
     // Jetpack Compose
     implementation(libs.compose.material)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.androidx.ui.graphics)
+    implementation(libs.material)
 
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
+
+    // Hilt
+    implementation(libs.hilt.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
