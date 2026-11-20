@@ -97,7 +97,6 @@ class SourceViewModel @Inject constructor(
         updateVisibleSources()
     }
 
-
     private fun updateVisibleSources() {
         _sources.value = filteredSources.take(currentVisibleCount)
         _hasMoreSources.value =

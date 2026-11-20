@@ -20,10 +20,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,11 +45,8 @@ import com.imaisnaini.dailytea.ui.theme.spacer_normal
 @Composable
 fun CategoryScreen(
     onCategoryClick: (Category) -> Unit,
-    onSearchSubmit: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var searchQuery by rememberSaveable { mutableStateOf("") }
-
     Scaffold(
         backgroundColor = BackgroundLight,
         modifier = modifier.fillMaxSize()
@@ -70,15 +63,7 @@ fun CategoryScreen(
                 Header(
                     title = "Explore Topics",
                     subtitle = "What hot-topics you want to read today..",
-                    searchQuery = searchQuery,
-                    onSearchQueryChange = { searchQuery = it },
-                    onSearchClick = {
-                        if (searchQuery.isNotBlank()) {
-                            onSearchSubmit(searchQuery.trim())
-                        }
-                    },
-                    modifier = modifier,
-                    searchPlaceholder = "Find you hot-tea.."
+                    modifier = modifier
                 )
             }
             items(
@@ -172,9 +157,6 @@ private fun CategoryCard(
 @Composable
 private fun CategoriesScreenPreview() {
     MyTheme(darkTheme = false) {
-        CategoryScreen(
-            onCategoryClick = {},
-            onSearchSubmit = {}
-        )
+        CategoryScreen(onCategoryClick = {})
     }
 }

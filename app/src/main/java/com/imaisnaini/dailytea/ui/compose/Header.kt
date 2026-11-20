@@ -17,11 +17,7 @@ import com.imaisnaini.dailytea.ui.theme.*
 fun Header(
     title: String,
     subtitle: String,
-    searchQuery: String,
-    onSearchQueryChange: (String) -> Unit,
-    onSearchClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    searchPlaceholder: String = "Find your tea.."
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
@@ -48,9 +44,7 @@ fun Header(
                 color = PrimaryBlue
             )
         }
-
         Spacer(modifier = Modifier.height(spacer_small))
-
         Text(
             text = title,
             style = Typography.h4.copy(
@@ -59,22 +53,11 @@ fun Header(
             ),
             color = TextPrimary
         )
-
         Spacer(modifier = Modifier.height(padding_normal))
-
         Text(
             text = subtitle,
             style = Typography.body1,
             color = TextSecondary
-        )
-
-        Spacer(modifier = Modifier.height(spacer_normal))
-
-        SearchBar(
-            query = searchQuery,
-            onQueryChange = onSearchQueryChange,
-            onSearchClick = onSearchClick,
-            placeholder = searchPlaceholder
         )
     }
 }

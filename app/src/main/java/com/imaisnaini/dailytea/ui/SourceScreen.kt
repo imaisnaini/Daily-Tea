@@ -41,6 +41,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.imaisnaini.dailytea.domain.model.Category
 import com.imaisnaini.dailytea.domain.model.Source
 import com.imaisnaini.dailytea.ui.compose.Header
+import com.imaisnaini.dailytea.ui.compose.SearchBar
 import com.imaisnaini.dailytea.ui.compose.cardStyle
 import com.imaisnaini.dailytea.ui.theme.BackgroundLight
 import com.imaisnaini.dailytea.ui.theme.SurfaceDark
@@ -55,6 +56,7 @@ import com.imaisnaini.dailytea.ui.theme.padding_large
 import com.imaisnaini.dailytea.ui.theme.padding_normal
 import com.imaisnaini.dailytea.ui.theme.padding_small
 import com.imaisnaini.dailytea.ui.theme.radius_normal
+import com.imaisnaini.dailytea.ui.theme.spacer_normal
 import com.imaisnaini.dailytea.ui.theme.spacer_small
 
 
@@ -119,11 +121,14 @@ fun SourceScreen(
             item(key = "header") {
                 Header(
                     title = "Explore Sources",
-                    subtitle = "Choose your favorite news sources of tea...",
-                    searchQuery = searchQuery,
-                    onSearchQueryChange = { searchQuery = it },
-                    onSearchClick = { viewModel.searchSources(searchQuery.trim()) },
-                    searchPlaceholder = "Find your tea's source.."
+                    subtitle = "Choose your favorite news sources of tea..."
+                )
+                SearchBar(
+                    query = searchQuery,
+                    onQueryChange = { searchQuery = it },
+                    placeholder = "Find your tea's source..",
+                    modifier = Modifier
+                        .padding(horizontal = spacer_normal, vertical = padding_large)
                 )
             }
 
@@ -168,7 +173,7 @@ fun SourceScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = if (searchQuery.isNotBlank()) {
+                            text = if (searchQuery.length >= 3) {
                                 "No tea's sources found"
                             } else {
                                 "No tea's sources available"

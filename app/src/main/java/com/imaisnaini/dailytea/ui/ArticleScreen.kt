@@ -20,11 +20,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Article
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -35,26 +32,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import coil.compose.AsyncImage
 import com.imaisnaini.dailytea.domain.model.Article
 import com.imaisnaini.dailytea.ui.compose.ArticleImage
 import com.imaisnaini.dailytea.ui.compose.Header
+import com.imaisnaini.dailytea.ui.compose.SearchBar
 import com.imaisnaini.dailytea.ui.theme.BackgroundLight
-import com.imaisnaini.dailytea.ui.theme.PrimaryBlue
-import com.imaisnaini.dailytea.ui.theme.SurfaceBlue
 import com.imaisnaini.dailytea.ui.theme.SurfaceDark
 import com.imaisnaini.dailytea.ui.theme.TextPrimary
 import com.imaisnaini.dailytea.ui.theme.TextSecondary
 import com.imaisnaini.dailytea.ui.theme.Typography
-import com.imaisnaini.dailytea.ui.theme.icon_large
 import com.imaisnaini.dailytea.ui.theme.img_medium
 import com.imaisnaini.dailytea.ui.theme.img_small
 import com.imaisnaini.dailytea.ui.theme.padding_large
 import com.imaisnaini.dailytea.ui.theme.padding_normal
 import com.imaisnaini.dailytea.ui.theme.radius_normal
+import com.imaisnaini.dailytea.ui.theme.spacer_normal
 import com.imaisnaini.dailytea.ui.theme.spacer_small
 
 @Composable
@@ -75,6 +69,9 @@ fun ArticleScreen(
     LaunchedEffect(sourceId) {
         viewModel.loadArticles(sourceId)
     }
+    LaunchedEffect(searchQuery) {
+        viewModel.searchArticles(searchQuery)
+    }
 
     Scaffold(
         backgroundColor = BackgroundLight,
@@ -94,17 +91,13 @@ fun ArticleScreen(
                 Header(
                     title = sourceName,
                     subtitle = "Latest teas from $sourceName.",
-                    searchQuery = searchQuery,
-                    onSearchQueryChange = {
-                        searchQuery = it
-                    },
-                    onSearchClick = {
-                        viewModel.loadArticles(
-                            sourceId = sourceId,
-                            query = searchQuery
-                        )
-                    },
-                    searchPlaceholder = "Search teas.."
+                )
+                SearchBar(
+                    query = searchQuery,
+                    onQueryChange = { searchQuery = it },
+                    placeholder = "Search teas..",
+                    modifier = Modifier
+                        .padding(horizontal = spacer_normal, vertical = padding_large)
                 )
             }
 
@@ -157,7 +150,7 @@ fun ArticleScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = if (searchQuery.isNotBlank()) {
+                                text = if (searchQuery.length >= 3) {
                                     "No tea found"
                                 } else {
                                     "No tea available"

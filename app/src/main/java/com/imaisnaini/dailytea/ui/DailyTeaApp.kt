@@ -24,7 +24,6 @@ fun DailyTeaApp() {
                 onCategoryClick = { category ->
                     navController.navigate("sources/${category.apiValue}")
                 },
-                onSearchSubmit = {},
                 modifier = Modifier
             )
         }
