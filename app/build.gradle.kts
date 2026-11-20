@@ -53,16 +53,15 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
 
-    // Compose BOM
+    // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.navigation.compose)
-
-    // Jetpack Compose
     implementation(libs.compose.material)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.material)
     implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.coil.compose)
 
     // Retrofit
     implementation(libs.retrofit)
