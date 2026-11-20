@@ -6,12 +6,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("v2/top-headlines/sources")
+    @GET("top-headlines/sources")
     suspend fun getSources(
         @Query("category") category: String? = null,
     ): SourceResponseDto
 
-    @GET("v2/top-headlines")
+    @GET("top-headlines")
     suspend fun getTopHeadlines(
         @Query("sources") sources: String? = null,
         @Query("category") category: String? = null,
@@ -20,7 +20,7 @@ interface ApiService {
         @Query("pageSize") pageSize: Int = 20
     ): ArticleResponseDto
 
-    @GET("v2/everything")
+    @GET("everything")
     suspend fun searchEverything(
         @Query("q") query: String,
         @Query("sources") sources: String? = null,

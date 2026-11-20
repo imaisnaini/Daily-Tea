@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -60,6 +62,7 @@ dependencies {
     implementation(libs.compose.material.icons.extended)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.material)
+    implementation(libs.androidx.compose.runtime.livedata)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -67,6 +70,8 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,5 +1,6 @@
 package com.imaisnaini.dailytea.di
 
+import android.util.Log
 import com.imaisnaini.dailytea.BuildConfig
 import com.imaisnaini.dailytea.data.enpoint.ApiService
 import dagger.Module
@@ -23,7 +24,10 @@ object NetworkModule {
                     .newBuilder()
                     .addHeader("X-Api-Key", BuildConfig.API_KEY)
                     .build()
-
+                Log.d(
+                    "DailyTea-HTTP",
+                    "${request.method} ${request.url}"
+                )
                 chain.proceed(request)
             }
             .build()

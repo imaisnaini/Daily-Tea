@@ -42,6 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.imaisnaini.dailytea.domain.model.Category
 import com.imaisnaini.dailytea.ui.compose.CategoryCardStyle
+import com.imaisnaini.dailytea.ui.compose.Header
 import com.imaisnaini.dailytea.ui.compose.SearchBar
 import com.imaisnaini.dailytea.ui.compose.cardStyle
 import com.imaisnaini.dailytea.ui.theme.BackgroundLight
@@ -83,6 +84,8 @@ fun CategoryScreen(
         ) {
             item(key = "header") {
                 Header(
+                    title = "Explore Topics",
+                    subtitle = "What hot-topics you want to read today..",
                     searchQuery = searchQuery,
                     onSearchQueryChange = { searchQuery = it },
                     onSearchClick = {
@@ -90,7 +93,8 @@ fun CategoryScreen(
                             onSearchSubmit(searchQuery.trim())
                         }
                     },
-                    modifier = modifier
+                    modifier = modifier,
+                    searchPlaceholder = "Find you hot-tea.."
                 )
             }
             items(
@@ -104,62 +108,6 @@ fun CategoryScreen(
                 )
             }
         }
-    }
-}
-
-@Composable
-fun Header(
-    searchQuery: String?,
-    onSearchQueryChange: (String) -> Unit,
-    onSearchClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(BackgroundLight)
-            .padding(horizontal = spacer_normal, vertical = padding_large)
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(padding_normal)
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.LocalCafe,
-                contentDescription = "Daily Tea Logo",
-                tint = PrimaryBlue,
-                modifier = Modifier.size(icon_small)
-            )
-            Text(
-                text = "Daily Tea",
-                style = Typography.subtitle2.copy(
-                    fontWeight = FontWeight.ExtraBold,
-                    letterSpacing = 0.5.sp
-                ),
-                color = PrimaryBlue
-            )
-        }
-        Spacer(modifier = Modifier.height(spacer_small))
-        Text(
-            text = "Explore Topics",
-            style = Typography.h4.copy(
-                fontWeight = FontWeight.ExtraBold,
-                letterSpacing = (-0.5).sp
-            ),
-            color = TextPrimary
-        )
-        Spacer(modifier = Modifier.height(padding_normal))
-        Text(
-            text = "What topics you want to read today..",
-            style = Typography.body1,
-            color = TextSecondary
-        )
-        Spacer(modifier = Modifier.height(spacer_normal))
-        SearchBar(
-            query = searchQuery,
-            onQueryChange = onSearchQueryChange,
-            onSearchClick = onSearchClick
-        )
     }
 }
 
