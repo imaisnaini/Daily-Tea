@@ -1,7 +1,5 @@
 package com.imaisnaini.dailytea.ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,45 +28,33 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.imaisnaini.dailytea.domain.model.Category
 import com.imaisnaini.dailytea.domain.model.Source
 import com.imaisnaini.dailytea.ui.compose.Header
 import com.imaisnaini.dailytea.ui.compose.cardStyle
 import com.imaisnaini.dailytea.ui.theme.BackgroundLight
-import com.imaisnaini.dailytea.ui.theme.BorderColor
-import com.imaisnaini.dailytea.ui.theme.PrimaryBlue
-import com.imaisnaini.dailytea.ui.theme.SurfaceBlue
 import com.imaisnaini.dailytea.ui.theme.SurfaceDark
-import com.imaisnaini.dailytea.ui.theme.SurfaceLight
 import com.imaisnaini.dailytea.ui.theme.TextPrimary
 import com.imaisnaini.dailytea.ui.theme.TextSecondary
 import com.imaisnaini.dailytea.ui.theme.Typography
 import com.imaisnaini.dailytea.ui.theme.border_light
-import com.imaisnaini.dailytea.ui.theme.icon_large
 import com.imaisnaini.dailytea.ui.theme.icon_medium
 import com.imaisnaini.dailytea.ui.theme.icon_small
 import com.imaisnaini.dailytea.ui.theme.icon_xlarge
-import com.imaisnaini.dailytea.ui.theme.img_xsmall
 import com.imaisnaini.dailytea.ui.theme.padding_large
 import com.imaisnaini.dailytea.ui.theme.padding_normal
 import com.imaisnaini.dailytea.ui.theme.padding_small
 import com.imaisnaini.dailytea.ui.theme.radius_normal
-import com.imaisnaini.dailytea.ui.theme.spacer_normal
 import com.imaisnaini.dailytea.ui.theme.spacer_small
 
 
@@ -122,35 +108,25 @@ fun SourceScreen(
         backgroundColor = BackgroundLight,
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
-
         LazyColumn(
             state = listState,
-            contentPadding = PaddingValues(
-                bottom = padding_normal
-            ),
+            contentPadding = PaddingValues(bottom = padding_normal),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
                 .statusBarsPadding()
         ) {
-
-            // Header
             item(key = "header") {
                 Header(
                     title = "Explore Sources",
-                    subtitle = "Choose your favorite news sources to read.",
+                    subtitle = "Choose your favorite news sources of tea...",
                     searchQuery = searchQuery,
-                    onSearchQueryChange = {
-                        searchQuery = it
-                    },
-                    onSearchClick = {
-                        viewModel.searchSources(searchQuery.trim())
-                    },
-                    searchPlaceholder = "Find your news source.."
+                    onSearchQueryChange = { searchQuery = it },
+                    onSearchClick = { viewModel.searchSources(searchQuery.trim()) },
+                    searchPlaceholder = "Find your tea's source.."
                 )
             }
 
-            // Loading state
             if (isLoading && sources.isEmpty()) {
                 item(key = "loading") {
                     Box(
@@ -162,10 +138,7 @@ fun SourceScreen(
                         CircularProgressIndicator()
                     }
                 }
-            }
-
-            // Error state
-            else if (error != null && sources.isEmpty()) {
+            } else if (error != null && sources.isEmpty()) {
                 item(key = "error") {
                     Column(
                         modifier = Modifier
@@ -175,27 +148,18 @@ fun SourceScreen(
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = error ?: "Something went wrong",
+                            text = error ?: "Oppsie.. Something went wrong",
                             style = Typography.body1
                         )
-
-                        Spacer(
-                            modifier = Modifier.height(spacer_small)
-                        )
-
+                        Spacer(modifier = Modifier.height(spacer_small))
                         Button(
-                            onClick = {
-                                viewModel.retry()
-                            }
+                            onClick = { viewModel.retry() }
                         ) {
                             Text("Retry")
                         }
                     }
                 }
-            }
-
-            // Empty state
-            else if (sources.isEmpty()) {
+            } else if (sources.isEmpty()) {
                 item(key = "empty") {
                     Box(
                         modifier = Modifier
@@ -205,30 +169,23 @@ fun SourceScreen(
                     ) {
                         Text(
                             text = if (searchQuery.isNotBlank()) {
-                                "No sources found"
+                                "No tea's sources found"
                             } else {
-                                "No sources available"
+                                "No tea's sources available"
                             },
                             color = SurfaceDark.copy(alpha = 0.6f)
                         )
                     }
                 }
-            }
-
-            // Source list
-            else {
+            } else {
                 items(
                     items = sources,
                     key = { it.id }
                 ) { source ->
                     SourceItem(
                         source = source,
-                        onClick = {
-                            onSourceClick(source)
-                        },
-                        modifier = Modifier.padding(
-                            horizontal = padding_large
-                        )
+                        onClick = { onSourceClick(source) },
+                        modifier = Modifier.padding(horizontal = padding_large)
                     )
 
                     Divider(
@@ -238,8 +195,6 @@ fun SourceScreen(
                         )
                     )
                 }
-
-                // Pagination loading indicator
                 if (hasMoreSources) {
                     item(key = "pagination_loading") {
                         Box(
@@ -274,9 +229,7 @@ fun SourceItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(spacer_small)
     ) {
-        SourceCategoryIcon(
-            category = source.category
-        )
+        SourceCategoryIcon(category = source.category)
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(padding_small)
@@ -291,7 +244,7 @@ fun SourceItem(
             Text(
                 text = source.description
                     ?.limitWords(20)
-                    ?: "No description available",
+                    ?: "The writer too lazy to write spoiler",
                 style = Typography.caption,
                 color = TextSecondary,
                 maxLines = 2,
@@ -335,9 +288,7 @@ fun SourceCategoryIcon(
         shape = RoundedCornerShape(radius_normal),
         color = style.containerColor
     ) {
-        Box(
-            contentAlignment = Alignment.Center
-        ) {
+        Box(contentAlignment = Alignment.Center) {
             Icon(
                 imageVector = style.icon,
                 contentDescription = category,

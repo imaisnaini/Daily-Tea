@@ -33,17 +33,17 @@ val Category.cardStyle: CategoryCardStyle
         Category.SPORTS -> CategoryCardStyle(
             containerColor = ErrorRed,
             contentColor = TextOnPrimary,
-            icon = Icons.Rounded.MonitorHeart
+            icon = Icons.Rounded.SportsHandball
         )
         Category.SCIENCE -> CategoryCardStyle(
             containerColor = SuccessGreen,
             contentColor = TextOnPrimary,
-            icon = Icons.Rounded.Eco
+            icon = Icons.Rounded.Science
         )
         Category.HEALTH -> CategoryCardStyle(
             containerColor = BrightBlue,
             contentColor = BrandBlue,
-            icon = Icons.Rounded.Science
+            icon = Icons.Rounded.MonitorHeart
         )
         Category.ENTERTAINMENT -> CategoryCardStyle(
             containerColor = WarningOrange,

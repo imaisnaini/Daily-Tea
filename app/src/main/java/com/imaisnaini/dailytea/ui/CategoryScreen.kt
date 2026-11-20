@@ -7,25 +7,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.LocalCafe
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,27 +32,19 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import com.imaisnaini.dailytea.domain.model.Category
-import com.imaisnaini.dailytea.ui.compose.CategoryCardStyle
 import com.imaisnaini.dailytea.ui.compose.Header
-import com.imaisnaini.dailytea.ui.compose.SearchBar
 import com.imaisnaini.dailytea.ui.compose.cardStyle
 import com.imaisnaini.dailytea.ui.theme.BackgroundLight
 import com.imaisnaini.dailytea.ui.theme.MyTheme
-import com.imaisnaini.dailytea.ui.theme.PrimaryBlue
-import com.imaisnaini.dailytea.ui.theme.TextPrimary
-import com.imaisnaini.dailytea.ui.theme.TextSecondary
 import com.imaisnaini.dailytea.ui.theme.Typography
 import com.imaisnaini.dailytea.ui.theme.icon_large
 import com.imaisnaini.dailytea.ui.theme.icon_small
 import com.imaisnaini.dailytea.ui.theme.padding_large
-import com.imaisnaini.dailytea.ui.theme.padding_normal
 import com.imaisnaini.dailytea.ui.theme.padding_small
 import com.imaisnaini.dailytea.ui.theme.radius_large
 import com.imaisnaini.dailytea.ui.theme.radius_normal
 import com.imaisnaini.dailytea.ui.theme.spacer_normal
-import com.imaisnaini.dailytea.ui.theme.spacer_small
 
 @Composable
 fun CategoryScreen(
@@ -67,7 +52,6 @@ fun CategoryScreen(
     onSearchSubmit: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val categories = Category.entries
     var searchQuery by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
